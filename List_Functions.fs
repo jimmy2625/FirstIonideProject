@@ -20,12 +20,6 @@ List.filter (fun x -> x<4) testIntegerList
 
 //List.fold accumulates the elements of the list with the accumulation function f (folder) starting with the value e (initialState) - the function f is folded over the list
 //Adds all even numbers in the list together
-let folder state value = 
-    if value % 2 = 0 then
-        state + value
-    else 
-        state
-
-let initialState = 0
-
-List.fold folder initialState testIntegerList
+//The x represents the accumulator
+//The y represents the element from the list
+List.fold (fun x y -> if y % 2 = 0 then x + y else x) 0 testIntegerList
