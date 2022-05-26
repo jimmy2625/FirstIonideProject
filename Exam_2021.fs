@@ -64,10 +64,25 @@ let walk2 (P(coord,direction)) (ms:move list) =
 walk2 (P (C (0, 0), North)) [TurnRight; Forward 10; TurnLeft]
 
 //1.4
-let rec path (P(coord,direction)) (ms:move list) =
-    match ms with 
-    |[] -> [coord]
-    //|x::xs -> path (walk(P(coord,direction)) x) xs
+let rec path (P(coord,direction)) (ms : move list) : coord list =
+        match ms with
+        |[]     -> [coord] 
+        |x::xs  ->  
+        match x with
+            |TurnLeft|TurnRight -> path (step (P(coord,direction)) x) xs
+            |Forward dist       -> coord :: path (P(move dist direction coord,direction)) xs
 
 path (P(C(1,0), North)) []
 path (P (C (0, 0), North)) [TurnRight; Forward 10; TurnLeft]
+
+let path2 (P(coord,direction)) (ms : move list) : coord list =
+    let rec pathInner (P(coord,direction)) (ms : move list) (acc : coord list) : coord list =
+        match ms with
+        |[]     -> [coord]
+        |x::xs  -> match x with
+                    |TurnLeft|TurnRight -> pathInner (step(P(coord,direction)) x) xs acc
+                    |Forward dist -> coord :: pathInner (P(move dist direction coord,direction)) xs acc
+    pathInner (P(coord,direction)) ms []
+
+path2 (P(C(1,0), North)) []
+path2 (P (C (0, 0), North)) [TurnRight; Forward 10; TurnLeft]
