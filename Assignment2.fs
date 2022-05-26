@@ -71,3 +71,4 @@ let rec explode2 = function
 explode2 "hej fede"
 
 //Exercise 2.6 = Write a function implode : char list -> string that given a list of characters cs returns a string with all characters of cs in the same order.
+let implode (cs: char list) = List.foldBack (fun (a:char ) (b:string) -> System.Char.ToString(a) + b) cs ""
