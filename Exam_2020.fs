@@ -99,10 +99,27 @@ let rec foo x =
  | y :: ys when x = y -> ys
  | y :: ys -> y :: (foo x ys)
 
+foo 12 [10;11;12]
+
+(*
+    The foo function takes an element x and checks if the head of the given list is the same as x
+    If yes, then return the tail of the list, the list without the x
+    If no, then concatenate the head of the list with the recursive call to foo on the rest of the list
+*)
+
 let rec bar x =
  function
  | [] -> []
  | xs :: xss -> (x :: xs) :: bar x xss
+
+bar 10 [[10;11];[12;13]]
+
+(*
+    The bar function takes an element x and a list of lists
+    If the list is empty, then simply return the empty list
+    Otherwise, we add the x element to the head of the list and concatenates that to the list of lists 
+    using a recursive call to bar
+*)
 
 let rec baz =
  function
@@ -114,3 +131,76 @@ let rec baz =
         | [] -> []
         | y :: ys -> ((foo y >> baz >> bar y) xs) @ (aux ys)
     aux xs
+
+baz [1;2;3]
+
+(*
+    If the list is empty it simply returns the empty list
+    If the list contains a single element then return a list of lists containing that element
+    If there is a list, the recursive aux is called
+    The aux returns the empty list if the list is empty
+    Otherwise it calls foo(remove on the head) then compositioned to baz which returns both orders of ys
+    Then it is compositioned to bar which adds the y back at the head of each list of lists
+    This is essentially all permutations of the given list
+*)
+
+//2.1
+(*
+    The type of foo is 'a -> list<'a> -> list<'a>
+    The type of bar is 'a -> list<list<'a>> -> list<list<'a>>
+    The type of baz is list<'a> -> list<list<'a>>
+
+    The foo function can be called remove, because it removes the x element from the list
+    The bar function can be called addHeadToAllLists, since it adds the element at the head of all lists
+    The baz function can be called permutations, because it results in all permutations of the given list
+*)
+
+//2.2
+(*
+    The warning comes from the fact that the foo function does not consider the case of the empty list
+    
+    In the function baz, the only instance of executing foo is when there is at least two elements in the list (line 128)
+    Therefore foo will never execute with an empty list in baz
+
+    If we want to create a foo2 that handles this incomplete pattern matching we would simply add the empty list -> empty list clause
+*)
+
+let rec foo2 x = 
+    function
+    | [] -> []
+    | y :: ys when x = y -> ys
+    | y :: ys -> y :: (foo x ys)
+
+foo2 10 []
+
+
+//2.3
+(*
+    The typing can be found using ionide and creating a new let-expression including the line of code
+    Here the typing is: 'a -> (list<'a> -> list<list<'a>>)
+
+    It first removes the element from the list
+    It finds all permutations of the list without the element
+    Then it adds back the element to all list of lists
+*)
+
+let example y = foo y >> baz >> bar y
+
+//2.4
+(*
+    To make a bar2 using higher-order functions I will use the List.map function to map each list to the list that has x in front
+*)
+
+let bar2 x lstlst = List.map (fun lst -> x::lst) lstlst
+
+//2.5
+(*
+    To make baz2 using higher-order functions I will use the List.collect method in the final match case of baz
+    List.collect works like List.map except it maps every element to a list and concatenates all the sublist in the end
+*)
+
+let rec baz2 =
+ function
+ | [] -> []
+ | [x] -> [[x]]
+ | xs -> List.collect (fun y -> (foo y >> baz >> bar y) xs) xs
