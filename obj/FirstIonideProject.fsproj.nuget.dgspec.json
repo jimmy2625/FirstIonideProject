@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/lil_jimmy_skit/Desktop/FSHARPGAY/FirstIonideProject/FirstIonideProject.fsproj": {}
+    "/Users/lil_jimmy_skit/FirstIonideProject/FirstIonideProject/FirstIonideProject.fsproj": {}
   },
   "projects": {
-    "/Users/lil_jimmy_skit/Desktop/FSHARPGAY/FirstIonideProject/FirstIonideProject.fsproj": {
+    "/Users/lil_jimmy_skit/FirstIonideProject/FirstIonideProject/FirstIonideProject.fsproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/lil_jimmy_skit/Desktop/FSHARPGAY/FirstIonideProject/FirstIonideProject.fsproj",
+        "projectUniqueName": "/Users/lil_jimmy_skit/FirstIonideProject/FirstIonideProject/FirstIonideProject.fsproj",
         "projectName": "FirstIonideProject",
-        "projectPath": "/Users/lil_jimmy_skit/Desktop/FSHARPGAY/FirstIonideProject/FirstIonideProject.fsproj",
+        "projectPath": "/Users/lil_jimmy_skit/FirstIonideProject/FirstIonideProject/FirstIonideProject.fsproj",
         "packagesPath": "/Users/lil_jimmy_skit/.nuget/packages/",
-        "outputPath": "/Users/lil_jimmy_skit/Desktop/FSHARPGAY/FirstIonideProject/obj/",
+        "outputPath": "/Users/lil_jimmy_skit/FirstIonideProject/FirstIonideProject/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/lil_jimmy_skit/.nuget/NuGet/NuGet.Config"
