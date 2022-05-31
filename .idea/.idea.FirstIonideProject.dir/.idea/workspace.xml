@@ -5,6 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0d14da8a-1af5-442e-aa8d-e06b33f776cf" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Assignment3.fs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assignment4.fs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Chapter_1.fs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Chapter_2.fs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Chapter_3_4.fs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Chapter_5.fs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.FirstIonideProject.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.FirstIonideProject.dir/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FirstIonideProject.fsproj" beforeDir="false" afterPath="$PROJECT_DIR$/FirstIonideProject.fsproj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/obj/Debug/net6.0/FirstIonideProject.assets.cache" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net6.0/FirstIonideProject.assets.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/obj/Debug/net6.0/FirstIonideProject.fsproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net6.0/FirstIonideProject.fsproj.AssemblyReference.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/obj/Debug/net6.0/FirstIonideProject.fsproj.CoreCompileInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net6.0/FirstIonideProject.fsproj.CoreCompileInputs.cache" afterDir="false" />
@@ -12,6 +20,8 @@
       <change beforePath="$PROJECT_DIR$/obj/FirstIonideProject.fsproj.nuget.g.props" beforeDir="false" afterPath="$PROJECT_DIR$/obj/FirstIonideProject.fsproj.nuget.g.props" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/obj/project.assets.json" beforeDir="false" afterPath="$PROJECT_DIR$/obj/project.assets.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/obj/project.nuget.cache" beforeDir="false" afterPath="$PROJECT_DIR$/obj/project.nuget.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/project.packagespec.json" beforeDir="false" afterPath="$PROJECT_DIR$/obj/project.packagespec.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/rider.project.restore.info" beforeDir="false" afterPath="$PROJECT_DIR$/obj/rider.project.restore.info" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,6 +72,7 @@
       <option name="presentableId" value="Default" />
       <updated>1653647652809</updated>
       <workItem from="1653647673499" duration="38000" />
+      <workItem from="1653990722043" duration="668000" />
     </task>
     <servers />
   </component>
@@ -69,8 +80,19 @@
     <option name="version" value="3" />
   </component>
   <component name="UnityCheckinConfiguration" checkUnsavedScenes="true" />
-  <component name="UnityProjectConfiguration" hasMinimizedUI="null" />
+  <component name="UnityProjectConfiguration" hasMinimizedUI="false" />
   <component name="UnityUnitTestConfiguration" currentTestLauncher="NUnit" />
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
   </component>

@@ -1,10 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "s9pEjhvce2WE3dIYXVI27F1/WjMNTYMDqdL8IjPTA+gppgYriI5NR5QyLGfwq5h9iO7SXSflkhA4zF9xKTNesQ==",
+  "dgSpecHash": "OiXZJYejQU+qJi3j00tSd4ZJK6vnheWvQPFRn2Ie7NF/Z+0PV+y036+cD93M0fZpFJlhscMEuhFKIoNvds5DHQ==",
   "success": true,
-  "projectFilePath": "c:\\Users\\ejer\\Desktop\\FSHARPGAY\\FirstIonideProject\\FirstIonideProject.fsproj",
+  "projectFilePath": "/Users/lil_jimmy_skit/FirstIonideProject/FirstIonideProject/FirstIonideProject.fsproj",
   "expectedPackageFiles": [
-    "C:\\Users\\ejer\\.nuget\\packages\\fsharp.core\\6.0.2\\fsharp.core.6.0.2.nupkg.sha512"
+    "/Users/lil_jimmy_skit/.nuget/packages/fsharp.core/6.0.2/fsharp.core.6.0.2.nupkg.sha512"
   ],
   "logs": []
 }

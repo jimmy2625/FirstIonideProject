@@ -1,31 +1,27 @@
 {
   "format": 1,
   "restore": {
-    "c:\\Users\\ejer\\Desktop\\FSHARPGAY\\FirstIonideProject\\FirstIonideProject.fsproj": {}
+    "/Users/lil_jimmy_skit/FirstIonideProject/FirstIonideProject/FirstIonideProject.fsproj": {}
   },
   "projects": {
-    "c:\\Users\\ejer\\Desktop\\FSHARPGAY\\FirstIonideProject\\FirstIonideProject.fsproj": {
+    "/Users/lil_jimmy_skit/FirstIonideProject/FirstIonideProject/FirstIonideProject.fsproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\Users\\ejer\\Desktop\\FSHARPGAY\\FirstIonideProject\\FirstIonideProject.fsproj",
+        "projectUniqueName": "/Users/lil_jimmy_skit/FirstIonideProject/FirstIonideProject/FirstIonideProject.fsproj",
         "projectName": "FirstIonideProject",
-        "projectPath": "c:\\Users\\ejer\\Desktop\\FSHARPGAY\\FirstIonideProject\\FirstIonideProject.fsproj",
-        "packagesPath": "C:\\Users\\ejer\\.nuget\\packages\\",
-        "outputPath": "c:\\Users\\ejer\\Desktop\\FSHARPGAY\\FirstIonideProject\\obj\\",
+        "projectPath": "/Users/lil_jimmy_skit/FirstIonideProject/FirstIonideProject/FirstIonideProject.fsproj",
+        "packagesPath": "/Users/lil_jimmy_skit/.nuget/packages/",
+        "outputPath": "/Users/lil_jimmy_skit/FirstIonideProject/FirstIonideProject/obj/",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-        ],
         "configFilePaths": [
-          "C:\\Users\\ejer\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "/Users/lil_jimmy_skit/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "https://api.nuget.org/v3/index.json": {}
+          "https://api.nuget.org/v3/index.json": {},
+          "https://nuget.pkg.github.com/jesper-bengtson/index.json": {}
         },
         "frameworks": {
           "net6.0": {
@@ -60,7 +56,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/6.0.201/RuntimeIdentifierGraph.json"
         }
       }
     }
