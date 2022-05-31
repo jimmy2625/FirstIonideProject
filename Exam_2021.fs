@@ -126,3 +126,31 @@ let path2 (P(coord,direction)) (ms : move list) : coord list =
 
 path2 (P(C(1,0), North)) []
 path2 (P (C (0, 0), North)) [TurnRight; Forward 10; TurnLeft]
+
+//2 Code Comprehension
+
+let foo f =
+  let mutable m = Map.empty
+  let aux x =
+    match Map.tryFind x m with
+    | Some y when Map.containsKey x m -> y
+    | None   ->
+      m <- Map.add x (f x) m; f x
+
+  aux
+
+let rec bar x =
+  match x with
+  | 0 -> 0
+  | 1 -> 1
+  | y -> baz (y - 1) + baz (y - 2)
+
+and baz = foo bar
+
+(*
+    The type of foo = ('a -> 'b) -> ('a -> 'b)
+    The type of bar = int -> int
+    The type of baz = int -> int
+*)
+
+foo bar 4

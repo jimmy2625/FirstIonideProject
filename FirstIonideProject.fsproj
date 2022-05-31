@@ -25,7 +25,6 @@
     <Compile Include="Assignment4.fs" />
     <Compile Include="Assignment5.fs" />
     <Compile Include="StateMonadB.fs" />
-    <Compile Include="tailRecursion.fs" />
   </ItemGroup>
 
 </Project>

@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "/Users/benjamin/Documents/ITU/6_semester/f#/FirstIonideProject/FirstIonideProject.fsproj": {}
+    "/Users/lil_jimmy_skit/FirstIonideProject/FirstIonideProject/FirstIonideProject.fsproj": {}
   },
   "projects": {
-    "/Users/benjamin/Documents/ITU/6_semester/f#/FirstIonideProject/FirstIonideProject.fsproj": {
+    "/Users/lil_jimmy_skit/FirstIonideProject/FirstIonideProject/FirstIonideProject.fsproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/benjamin/Documents/ITU/6_semester/f#/FirstIonideProject/FirstIonideProject.fsproj",
+        "projectUniqueName": "/Users/lil_jimmy_skit/FirstIonideProject/FirstIonideProject/FirstIonideProject.fsproj",
         "projectName": "FirstIonideProject",
-        "projectPath": "/Users/benjamin/Documents/ITU/6_semester/f#/FirstIonideProject/FirstIonideProject.fsproj",
-        "packagesPath": "/Users/benjamin/.nuget/packages/",
-        "outputPath": "/Users/benjamin/Documents/ITU/6_semester/f#/FirstIonideProject/obj/",
+        "projectPath": "/Users/lil_jimmy_skit/FirstIonideProject/FirstIonideProject/FirstIonideProject.fsproj",
+        "packagesPath": "/Users/lil_jimmy_skit/.nuget/packages/",
+        "outputPath": "/Users/lil_jimmy_skit/FirstIonideProject/FirstIonideProject/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/Users/benjamin/.nuget/NuGet/NuGet.Config"
+          "/Users/lil_jimmy_skit/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
