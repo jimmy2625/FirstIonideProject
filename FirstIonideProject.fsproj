@@ -6,17 +6,25 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="Assignment1.fs"/>
-    <Compile Include="Assignment2.fs"/>
-    <Compile Include="Chapter1.fs"/>
-    <Compile Include="Exam_2021.fs"/>
-    <Compile Include="List_Functions.fs"/>
-    <Compile Include="Map_Functions.fs"/>
-    <Compile Include="Set_Functions.fs"/>
-    <Compile Include="Exam_2020.fs"/>
-    <Compile Include="StateMonad.fs"/>
-    <Compile Include="Assignment6.fs"/>
-    <Compile Include="Exam_2021Re.fs"/>
+    <Compile Include="Assignment1.fs" />
+    <Compile Include="Assignment2.fs" />
+    <Compile Include="Chapter1.fs" />
+    <Compile Include="Exam_2021.fs" />
+    <Compile Include="List_Functions.fs" />
+    <Compile Include="Map_Functions.fs" />
+    <Compile Include="Set_Functions.fs" />
+    <Compile Include="Exam_2020.fs" />
+    <Compile Include="StateMonad.fs" />
+    <Compile Include="Assignment6.fs" />
+    <Compile Include="Exam_2021Re.fs" />
+    <Compile Include="Chapter_1.fs" />
+    <Compile Include="Chapter_2.fs" />
+    <Compile Include="Chapter_3_4.fs" />
+    <Compile Include="Chapter_5.fs" />
+    <Compile Include="Assignment3.fs" />
+    <Compile Include="Assignment4.fs" />
+    <Compile Include="Assignment5.fs" />
+    <Compile Include="StateMonadB.fs" />
   </ItemGroup>
 
 </Project>
