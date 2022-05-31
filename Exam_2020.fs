@@ -204,3 +204,67 @@ let rec baz2 =
  | [] -> []
  | [x] -> [[x]]
  | xs -> List.collect (fun y -> (foo y >> baz >> bar y) xs) xs
+
+
+//2.6
+ (*
+     To make it a tail recursive solution I must make sure that any call to aux is made at the outermost point of the branch
+     (right after the arrow) Also add the continuation call in every branch
+ *)
+
+let fooTail x lst =
+    let rec aux c = 
+        function
+        | [] -> c []
+        | y :: ys when x = y -> c ys
+        | y :: ys -> aux (fun result -> c(y :: result)) ys
+    aux id lst
+
+//3 Rock Paper Scissors
+(*
+    I create my own types of shape of result
+*)
+//3.1
+
+type shape = Rock | Paper | Scissors
+
+type result = P1Win | P2Win | Draw
+
+//I match with my moves and return the result of the moves
+
+let rps s1 s2 =
+    match s1,s2 with 
+    |Paper, Rock -> P1Win
+    |Rock, Scissors -> P1Win
+    |Scissors, Paper -> P1Win
+    |Rock, Paper -> P2Win
+    |Paper, Scissors -> P2Win
+    |Scissors, Rock -> P2Win
+    |_ -> Draw
+
+//3.2
+(*
+    Create a function parrot, that just mimics the same move
+*)
+
+let parrot s =
+    function 
+    |[] -> s
+    |(_,m) :: _ -> m
+
+(*
+    Create a function beatingStrat that beats the shape the opponent has played the most
+    To do this, first i create a let-binding on the opponentMoves that takes the snd of the moves list and uses List.map to get the values
+    I then count the amount of rocks, papers and scissors in the opponentMoves by filtering out the shape and piping it to List.length
+    I then do a simple if statement to check which shape i should return
+*)
+
+let beatingStrat moves =
+    let opponentMoves = List.map snd moves
+    let numRocks = opponentMoves |> List.filter (fun s -> s = Rock) |> List.length
+    let numPapers = opponentMoves |> List.filter (fun s -> s = Paper) |> List.length
+    let numScissors = opponentMoves |> List.filter (fun s -> s = Scissors) |> List.length
+
+    if numScissors >= numPapers && numScissors >= numRocks then Rock
+    else if numRocks >= numPapers && numRocks >= numScissors then Paper
+    else Scissors
