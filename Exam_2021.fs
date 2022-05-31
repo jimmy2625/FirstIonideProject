@@ -151,6 +151,9 @@ and baz = foo bar
     The type of foo = ('a -> 'b) -> ('a -> 'b)
     The type of bar = int -> int
     The type of baz = int -> int
+
+    The and keyword indicates that the two functions are mutually recursive which means they depend on each other to compile and run
+    
 *)
 
 foo bar 4
