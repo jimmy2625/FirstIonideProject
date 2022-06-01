@@ -23,3 +23,9 @@ List.filter (fun x -> x<4) testIntegerList
 //The x represents the accumulator
 //The y represents the element from the list
 List.fold (fun x y -> if y % 2 = 1 then x+y else x) 0 testIntegerList
+
+//List.Collect
+
+//List.splitAt
+
+//List.unfold
