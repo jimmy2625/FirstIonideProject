@@ -156,4 +156,46 @@ and baz = foo bar
     
 *)
 
-foo bar 4
+//4 Rings
+
+//4.1
+type 'a ring = R of 'a list * 'a list
+
+//4.2
+let length (R(a,b)) = List.length a + List.length b
+
+let ringFromList lst = R([],lst)
+
+let ringToList (R(a,b)) = b @ List.rev a
+
+ringToList (ringFromList [1;2;3;4;5])
+
+length (ringFromList [1;2;3;4;5])
+
+//4.3
+let empty = R([],[])
+
+let push x (R(a,b)) = R(a,x::b)
+
+let peek = function
+    |(R(_,b)) when b.Length > 0 -> Some b.Head
+    |(R(a,[])) when a.Length > 0 -> Some (List.rev a).Head
+    |_ -> None 
+
+[1;2;3;4;5] |> ringFromList |> peek
+
+let pop = function
+    |(R(a,[])) when a.Length > 0 -> Some (R([], (List.rev a).Tail))
+    |(R(a,b)) when b.Length > 0 -> Some (R(a,b.Tail))
+    |_ -> None
+
+[1;2;3;4;5] |> ringFromList |> pop |> Option.get |> ringToList
+
+let cw = function
+    |(R([],[])) -> (R([],[]))
+    |(R([],b)) when b.Length > 0 -> (R((List.rev b).Tail,([((List.rev b).Head)])))
+    |(R(a,b)) when a.Length > 0 -> (R(a.Tail,a.Head::b))
+
+[1;2;3;4;5] |> ringFromList |> cw |> cw |> ringToList
+
+ringToList (empty : int ring)
