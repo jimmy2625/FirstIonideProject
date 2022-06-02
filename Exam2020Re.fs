@@ -27,8 +27,20 @@ module exam2020Re
     let rec fold f acc t =
         match t with
         |Leaf -> acc
-        |Node (tree,a,tree2) -> fold f a tree
+        |Node (tree,a,tree2) -> fold f (f (fold f acc tree) a) tree2
+
+    //fold (fun acc x -> x - acc) 0 (fromList [3;5;4;10])
+    
+    let rec foldBack f acc t =
+        match t with
+        |Leaf -> acc
+        |Node (tree,a,tree2) -> foldBack f (f (foldBack f acc tree2) a) tree
         
-    fold (fun acc x -> x - acc) 0 (fromList [3;5;4;10])
-    let foldBack _ = failwith "not implemented"
-    let inOrder _ = failwith "not implemented"
+    let rec inOrder2 t =
+        let rec auxInOrder t acc =
+            match t with
+            |Leaf                -> acc
+            |Node (tree,a,tree2) -> (foldBack (fun acc x -> x :: acc) acc t)
+        auxInOrder t []
+    
+    let inOrder t = foldBack (fun acc x -> x :: acc) [] t
