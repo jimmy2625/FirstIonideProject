@@ -113,26 +113,31 @@
     ]
   },
   "packageFolders": {
-    "/Users/benjamin/.nuget/packages/": {}
+    "C:\\Users\\ejer\\.nuget\\packages\\": {},
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/benjamin/Documents/ITU/6_semester/f#/FirstIonideProject/FirstIonideProject.fsproj",
+      "projectUniqueName": "c:\\Users\\ejer\\Desktop\\FSHARPGAY\\FirstIonideProject\\FirstIonideProject.fsproj",
       "projectName": "FirstIonideProject",
-      "projectPath": "/Users/benjamin/Documents/ITU/6_semester/f#/FirstIonideProject/FirstIonideProject.fsproj",
-      "packagesPath": "/Users/benjamin/.nuget/packages/",
-      "outputPath": "/Users/benjamin/Documents/ITU/6_semester/f#/FirstIonideProject/obj/",
+      "projectPath": "c:\\Users\\ejer\\Desktop\\FSHARPGAY\\FirstIonideProject\\FirstIonideProject.fsproj",
+      "packagesPath": "C:\\Users\\ejer\\.nuget\\packages\\",
+      "outputPath": "c:\\Users\\ejer\\Desktop\\FSHARPGAY\\FirstIonideProject\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+      ],
       "configFilePaths": [
-        "/Users/benjamin/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\ejer\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net6.0"
       ],
       "sources": {
-        "https://api.nuget.org/v3/index.json": {},
-        "https://nuget.pkg.github.com/jesper-bengtson/index.json": {}
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net6.0": {
@@ -167,7 +172,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/6.0.201/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
       }
     }
   }

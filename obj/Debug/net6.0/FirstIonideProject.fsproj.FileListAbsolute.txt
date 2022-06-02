@@ -32,3 +32,6 @@ C:/Users/ejer/Desktop/FSHARPGAY/FirstIonideProject/obj/Debug/net6.0/FirstIonideP
 /Users/lil_jimmy_skit/FirstIonideProject/FirstIonideProject/obj/Debug/net6.0/FirstIonideProject.fsproj.AssemblyReference.cache
 /Users/lil_jimmy_skit/FirstIonideProject/FirstIonideProject/obj/Debug/net6.0/FirstIonideProject.AssemblyInfoInputs.cache
 /Users/lil_jimmy_skit/FirstIonideProject/FirstIonideProject/obj/Debug/net6.0/FirstIonideProject.AssemblyInfo.fs
+C:\Users\ejer\Desktop\FSHARPGAY\FirstIonideProject\obj\Debug\net6.0\FirstIonideProject.fsproj.AssemblyReference.cache
+C:\Users\ejer\Desktop\FSHARPGAY\FirstIonideProject\obj\Debug\net6.0\FirstIonideProject.AssemblyInfoInputs.cache
+C:\Users\ejer\Desktop\FSHARPGAY\FirstIonideProject\obj\Debug\net6.0\FirstIonideProject.AssemblyInfo.fs
