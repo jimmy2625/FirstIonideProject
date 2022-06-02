@@ -27,6 +27,7 @@ module hej
         match t with
         |Leaf -> acc
         |Node (tree,a,tree2) -> fold f (f (fold f acc tree) a) tree2
+<<<<<<< HEAD
         
     fold (fun acc x -> x - acc) 0 (fromList [3;5;4;10])
     
@@ -148,3 +149,21 @@ module hej
       | lst               -> baz2 (foo2 lst)
     
     baz2 [1;3;2]
+=======
+
+    //fold (fun acc x -> x - acc) 0 (fromList [3;5;4;10])
+    
+    let rec foldBack f acc t =
+        match t with
+        |Leaf -> acc
+        |Node (tree,a,tree2) -> foldBack f (f (foldBack f acc tree2) a) tree
+        
+    let rec inOrder2 t =
+        let rec auxInOrder t acc =
+            match t with
+            |Leaf                -> acc
+            |Node (tree,a,tree2) -> (foldBack (fun acc x -> x :: acc) acc t)
+        auxInOrder t []
+    
+    let inOrder t = foldBack (fun acc x -> x :: acc) [] t
+>>>>>>> d473da925d16a78d0ac2cec5ecba78c00e8161a0
