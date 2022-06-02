@@ -25,7 +25,7 @@ length (Cons1 (3, Cons2 (true, Cons1 (4, Cons2 (false, Cons2(true, Nil))))))
   If Nil then return two empty lists
   If Cons1 then append the element a to the first list. Because split returns two lists use the fst keyword on the split recursive call, the second list is just run recursively
   If Cons2 then just run recursively on the first list, but append to the second list using the snd keyword. 
-  This in turn will append to the first list if Cons1 type and append to the second line if Cons2.
+  This in turn will append to the first list if Cons1 type and append to the second list if Cons2.
 *)
 
 let rec split binlst =
@@ -152,3 +152,32 @@ bar [8;1;2;3;6;4]
   2.3
   
 *)
+
+//3 Approximating square roots
+//3.1
+
+//4 Rational numbers
+
+//4.1
+type rat = R of int * int
+
+//4.2
+//helper function to calculate g
+let rec helper n d = 
+    if d = 0 then n
+    else helper d (n % d)
+
+let mkRat n d = 
+  if n < 0 && d < 0 
+    then Some (R(n/helper n d, d/helper n d))
+      elif n < 0 && d > 0 
+        then Some (R(-n/helper n d, +d/helper n d))
+          elif n > 0 && d < 0 
+            then Some (R(-n/helper n d, +d/helper n d))
+              elif d <> 0 
+                then Some (R(n/helper n d, d/helper n d))
+                  else None
+
+let ratToString (R(a,b)) = string a + " / " + string b
+
+mkRat 15 -10 |> Option.get |> ratToString
