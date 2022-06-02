@@ -159,9 +159,14 @@ and baz = foo bar
 //4 Rings
 
 //4.1
+//I create the ring datatype by defining the 'a in both ring and the list tuples
+
 type 'a ring = R of 'a list * 'a list
 
 //4.2
+(*
+    Make sure to read the instructions carefully!!! Especially in ringToList, since it is a reversed
+*)
 let length (R(a,b)) = List.length a + List.length b
 
 let ringFromList lst = R([],lst)
@@ -173,19 +178,23 @@ ringToList (ringFromList [1;2;3;4;5])
 length (ringFromList [1;2;3;4;5])
 
 //4.3
+(*
+    Look at the complete list of algorithms and try your best!
+    Make sure the type signatures are the same as the ones given in the exam
+*)
 let empty = R([],[])
 
 let push x (R(a,b)) = R(a,x::b)
 
 let peek = function
-    |(R(_,b)) when b.Length > 0 -> Some b.Head
-    |(R(a,[])) when a.Length > 0 -> Some (List.rev a).Head
+    |(R([],b)) -> Some b.Head
+    |(R(a,[])) -> Some (List.rev a).Head
     |_ -> None 
 
 [1;2;3;4;5] |> ringFromList |> peek
 
 let pop = function
-    |(R(a,[])) when a.Length > 0 -> Some (R([], (List.rev a).Tail))
+    |(R(a,[])) -> Some (R([], (List.rev a).Tail))
     |(R(a,b)) when b.Length > 0 -> Some (R(a,b.Tail))
     |_ -> None
 
@@ -193,9 +202,64 @@ let pop = function
 
 let cw = function
     |(R([],[])) -> (R([],[]))
-    |(R([],b)) when b.Length > 0 -> (R((List.rev b).Tail,([((List.rev b).Head)])))
-    |(R(a,b)) when a.Length > 0 -> (R(a.Tail,a.Head::b))
+    |(R([],b)) -> (R((List.rev b).Tail,([((List.rev b).Head)])))
+    |(R(a,b)) -> (R(a.Tail,a.Head::b))
 
 [1;2;3;4;5] |> ringFromList |> cw |> cw |> ringToList
 
-ringToList (empty : int ring)
+let ccw = function
+    |(R([],[])) -> (R([],[]))
+    |(R(a,[])) -> (R(([(List.rev a).Head]),(List.rev a.Tail)))
+    |(R(a,b)) -> (R(b.Head::a, b.Tail))
+
+[1;2;3;4;5] |> ringFromList |> ccw |> ccw |> ringToList
+
+//4.4
+type StateMonad<'a, 'b> = SM of ('b ring -> ('a * 'b ring) option)
+
+let ret x = SM (fun st -> Some (x, st))
+
+let bind (SM m) f =
+ SM (fun st ->
+    match m st with
+    | None -> None
+    | Some (x, st') ->
+        let (SM g) = f x
+        g st')
+
+let (>>=) m f = bind m f
+
+let (>>>=) m n = m >>= (fun () -> n)
+
+let evalSM (SM f) s = f s
+
+(*
+    Use the following template for completing the SM part of the exam
+    The fst of the Some tuple is the returned element from the operation and the snd is the state of the ring after the operation
+    Some = success
+    None = failure
+    Check type signatures in exam (SMPush), SM<unit, 'a> = ()
+    Simply use the different functions from 4.3 to convert into SM functions instead, that is fail proof
+*)
+
+let smLength = SM (fun ring -> Some((length ring), (ring)))
+
+let smPush x = SM (fun ring -> Some((), (push x ring)))
+
+let smPop = SM (fun ring -> if length ring > 0 then Some ((peek ring), (Option.get (pop ring))) else None)
+
+let smCW = SM (fun ring -> Some ((),(cw ring)))
+
+let smCCW = SM (fun ring -> Some ((), (ccw ring)))
+
+[1;2;3;4;5] |> ringFromList |> evalSM (smCW >>>= smCW) |>
+ Option.get |> snd |> ringToList
+
+[1;2;3;4;5] |> ringFromList |> evalSM (smCCW >>>= smCCW) |>
+Option.get |> snd |> ringToList
+
+//4.5
+//Bullshit lidt om det her
+let ringStep =
+        smLength >>= fun x -> if x < 2 then ret() else
+            if(smPop >>=(fun x -> smPop >>=(fun y -> (x+y) % 2 = 0))) then ret() else smPush x >>= smPush y

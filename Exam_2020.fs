@@ -268,3 +268,35 @@ let beatingStrat moves =
     if numScissors >= numPapers && numScissors >= numRocks then Rock
     else if numRocks >= numPapers && numRocks >= numScissors then Paper
     else Scissors
+
+//4 RPN
+
+//4.1
+type stack = int list
+
+let emptyStack : stack = []
+
+type SM<'a> = S of (stack -> ('a * stack) option)
+
+let ret x = S (fun s -> Some (x, s))
+
+let fail = S (fun _ -> None)
+
+let bind f (S a) : SM<'b> =
+    S (fun s ->
+        match a s with
+        | Some (x, s') ->
+            let (S g) = f x
+            g s'
+        | None -> None)
+
+let (>>=) x f = bind f x
+let (>>>=) x y = x >>= (fun _ -> y)
+
+let evalSM (S f) = f emptyStack
+
+let push x = S (fun stack -> Some((),x::stack))
+
+let pop = S (fun stack -> if stack.Length > 0 then Some(stack.Head, stack.Tail) else None)
+
+push 5 >>>= push 6 >>>= pop |> evalSM
