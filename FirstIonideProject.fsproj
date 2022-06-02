@@ -7,6 +7,7 @@
 
   <ItemGroup>
     <Compile Include="Assignment1.fs" />
+    <Compile Include="2021TA.fs" />
     <Compile Include="Assignment2.fs" />
     <Compile Include="Exam_2021.fs" />
     <Compile Include="List_Functions.fs" />

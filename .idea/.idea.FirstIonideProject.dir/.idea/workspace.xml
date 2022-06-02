@@ -4,21 +4,17 @@
     <projectFile>FirstIonideProject.fsproj</projectFile>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0d14da8a-1af5-442e-aa8d-e06b33f776cf" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.FirstIonideProject.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.FirstIonideProject.dir/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/Debug/net6.0/FirstIonideProject.assets.cache" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net6.0/FirstIonideProject.assets.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/Debug/net6.0/FirstIonideProject.fsproj.CoreCompileInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net6.0/FirstIonideProject.fsproj.CoreCompileInputs.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/rider.project.restore.info" beforeDir="false" afterPath="$PROJECT_DIR$/obj/rider.project.restore.info" afterDir="false" />
+    <list default="true" id="0d14da8a-1af5-442e-aa8d-e06b33f776cf" name="Changes" comment="2020re">
+      <change afterPath="$PROJECT_DIR$/2021TA.fs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FirstIonideProject.fsproj" beforeDir="false" afterPath="$PROJECT_DIR$/FirstIonideProject.fsproj" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="Git.Settings">
-    <option name="UPDATE_TYPE" value="REBASE" />
-  </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="mock:///Users/benjamin/Documents/ITU/6_semester/f#/FirstIonideProject/Exam2020Re.fs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assignment3.fs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Chapter_5.fs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/tailRecursion.fs" root0="FORCE_HIGHLIGHTING" />
@@ -80,7 +76,7 @@
       <workItem from="1654174221880" duration="5000" />
       <workItem from="1654174236603" duration="6000" />
       <workItem from="1654174256324" duration="17000" />
-      <workItem from="1654174314287" duration="4196000" />
+      <workItem from="1654174314287" duration="4605000" />
     </task>
     <task id="LOCAL-00001" summary="Mine luksus noter :)">
       <created>1653991687933</created>
@@ -103,7 +99,14 @@
       <option name="project" value="LOCAL" />
       <updated>1653999570623</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="2020re">
+      <created>1654195080702</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1654195080702</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -128,6 +131,7 @@
     <MESSAGE value="Mine luksus noter :)" />
     <MESSAGE value="kommentarer til assignment 3" />
     <MESSAGE value="??" />
-    <option name="LAST_COMMIT_MESSAGE" value="??" />
+    <MESSAGE value="2020re" />
+    <option name="LAST_COMMIT_MESSAGE" value="2020re" />
   </component>
 </project>
