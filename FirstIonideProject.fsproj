@@ -26,6 +26,8 @@
     <Compile Include="Assignment5.fs" />
     <Compile Include="StateMonadB.fs" />
     <Compile Include="Exam2020Re.fs" />
+    <Compile Include="Exam_2022.fs" />
+    <Compile Include="varmen.fs" />
   </ItemGroup>
 
 </Project>
