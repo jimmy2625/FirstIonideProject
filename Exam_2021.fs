@@ -260,6 +260,3 @@ Option.get |> snd |> ringToList
 
 //4.5
 //Bullshit lidt om det her
-let ringStep =
-        smLength >>= fun x -> if x < 2 then ret() else
-            if(smPop >>=(fun x -> smPop >>=(fun y -> (x+y) % 2 = 0))) then ret() else smPush x >>= smPush y

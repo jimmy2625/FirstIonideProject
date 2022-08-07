@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\ejer\\Desktop\\FSHARPGAY\\FirstIonideProject\\FirstIonideProject.fsproj": {}
+    "c:\\Users\\ejer\\Desktop\\FSHARPGAY\\FirstIonideProject\\FirstIonideProject.fsproj": {}
   },
   "projects": {
-    "C:\\Users\\ejer\\Desktop\\FSHARPGAY\\FirstIonideProject\\FirstIonideProject.fsproj": {
+    "c:\\Users\\ejer\\Desktop\\FSHARPGAY\\FirstIonideProject\\FirstIonideProject.fsproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ejer\\Desktop\\FSHARPGAY\\FirstIonideProject\\FirstIonideProject.fsproj",
+        "projectUniqueName": "c:\\Users\\ejer\\Desktop\\FSHARPGAY\\FirstIonideProject\\FirstIonideProject.fsproj",
         "projectName": "FirstIonideProject",
-        "projectPath": "C:\\Users\\ejer\\Desktop\\FSHARPGAY\\FirstIonideProject\\FirstIonideProject.fsproj",
+        "projectPath": "c:\\Users\\ejer\\Desktop\\FSHARPGAY\\FirstIonideProject\\FirstIonideProject.fsproj",
         "packagesPath": "C:\\Users\\ejer\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ejer\\Desktop\\FSHARPGAY\\FirstIonideProject\\obj\\",
+        "outputPath": "c:\\Users\\ejer\\Desktop\\FSHARPGAY\\FirstIonideProject\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

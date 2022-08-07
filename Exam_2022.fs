@@ -75,7 +75,11 @@ module Exam2022
         |Square x -> acc
         |Quad(a,b,c,d) -> folder(folder(folder(folder acc a)b)c) d
     
-    let countWhite2 img = failwith "not implemented"
+    let countWhite2 img = 
+        match img with
+        |Square x when x = 255uy -> + 1
+        |Quad(a,b,c,d) -> fold countWhite a + fold countWhite b + fold countWhite c + fold countWhite d
+        |_ -> 0
 
 (* 2: Code Comprehension *)
     let rec foo =

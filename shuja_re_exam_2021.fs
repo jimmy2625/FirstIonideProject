@@ -6,11 +6,11 @@ type binList<'a, 'b> =
 
 //binList length language: F#
 // Path: exam/Program.fs
-let rec Binlength2 (c: binList<'a, 'b>) =
+let rec length (c: binList<'a, 'b>) =
     match c with 
     | Nil -> 0
-    | Cons1(_,b) -> 1 + Binlength2 b
-    | Cons2(_,b) -> 1 + Binlength2 b
+    | Cons1(_,b) -> 1 + length b
+    | Cons2(_,b) -> 1 + length b
 
 
 let rec split (bin: binList<'a, 'b>) = 
@@ -38,6 +38,9 @@ let rec filter f g (bin: binList<'a, 'b>) : binList<'a, 'b> =
     | Cons1(a,b) -> if f a then Cons1(a, filter f g b) else filter f g b
     | Cons2(c,d) -> if g c then Cons2(c, filter f g d) else filter f g d
 
+filter (fun x -> x % 2 = 0) 
+       id 
+       (Cons1 (3, Cons2 (true, Cons1 (4, Cons2 (false, Cons2(true, Nil))))))
 
 let fold f g acc (bin: binList<'a, 'c>) : 'b = 
     let rec aux acc = function

@@ -37,7 +37,7 @@ let rec split binlst =
 split (Cons1 (3, Cons2 (true, Cons1 (4, Cons2 (false, Cons2(true, Nil))))))
 
 (*
-  If Nul then return a tuple of ints of (0,0)
+  If Nil then return a tuple of ints of (0,0)
   I do the same as in split but instead of appending, I add 1 to the fst in Cons1 and add 1 to the snd if Cons2
 *)
 let rec length2 binlst = 
