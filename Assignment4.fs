@@ -37,7 +37,7 @@ let addSingle a (MS(map, size)) = add a 1u (MS(map, size))
 // If a already exists in the map, but there are fewer than we want to remove
 // Then a is completely removed from the map, and the size of the MS is
 // its current size minus the number of a's previously in the map
-// else twe use Map.add to update the MS with a smaller number of a's
+// else we use Map.add to update the MS with a smaller number of a's
 let remove a n (MS(map, size)) = 
     if (numItems a (MS(map, size)) < n) 
         then (MS(Map.remove a map, size - numItems a (MS(map, size))))

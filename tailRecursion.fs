@@ -34,7 +34,8 @@ let rec appendC xs ys c =
     match xs with
     | []       -> c ys
     | x :: xs' -> appendC xs' ys
-                      (fun r -> c (x :: r))                      
+                      (fun r -> c (x :: r))        
+                                    
 let (@) xs ys = appendC xs ys
 
 type BinTree =

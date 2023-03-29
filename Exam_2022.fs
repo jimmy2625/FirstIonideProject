@@ -144,6 +144,7 @@ module Exam2022
         | 0 -> ""
         | x when x % 2 = 0 -> foo (x / 2) + "0"
         | x when x % 2 = 1 -> foo (x / 2) + "1"
+        | _ -> failwith "negative number"
 
 (* Question 2.3 *) 
 
@@ -172,7 +173,8 @@ module Exam2022
     Q: Even though neither `foo` nor `bar` is tail recursive only one of them runs the risk of overflowing the stack.
        Which one and why does  the other one not risk overflowing the stack?
 
-    A: bar runs the risk of overflowing the stack because it has to keep calculating using foo to concatenate onto the rest of the list
+    A: only bar risks overflowing the stacks as a list can be of arbitrary length and easily overflow the stack
+       as you recurse over them.
 
     *)
 (* Question 2.5
@@ -301,18 +303,23 @@ module Exam2022
 
     let state = new StateBuilder()
 
-    let runStackProg2 : StateMonad<unit> =
-        state {
-            let! length = smLength
-            if length >= 2
-            then
-                let! x = pop
-                let! y = pop
-                if (x + y) % 2 <> 0
-                then
-                    do! push y
-                    do! push x
-        }
+    let runStackProg2 (prog: stackProgram) =
+        if prog = [] then SM (fun _ -> None)
+            else
+                let rec aux sp (acc: stack) =
+                    match sp with
+                    | []       -> SM (fun s -> Some ((acc.Head), s))
+                    | x::xs -> match x with
+                                |Push n -> aux xs (n::acc)
+                                |Add    -> match acc with
+                                           | []        -> SM (fun _ -> None)
+                                           | x::y::ys  -> aux xs ((x+y)::ys)
+                                           | _         -> SM (fun _ -> None)
+                                |Mult   -> match acc with
+                                           | []        -> SM (fun _ -> None)
+                                           | x::y::ys  -> aux xs ((x*y)::ys)
+                                           | _         -> SM (fun _ -> None)
+                aux prog (emptyStack ())
     
 (* Question 4.5 *)
 

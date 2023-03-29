@@ -12,7 +12,7 @@ let rec downto2 = function
 downto2 10
 
 //Exercise 2.2 = Write a function removeOddIdx : 'a list -> 'a list that given a list xs returns a list where all odd- indexed elements of xs have been removed
-let removeOddIdx xs = xs |> List.mapi(fun i el -> el,i) |> List.filter(fun (el,i) -> i%2 = 0) |> List.map fst
+let removeOddIdx xs = xs |> List.mapi(fun i el -> el,i) |> List.filter(fun (_,i) -> i%2 = 0) |> List.map fst
 removeOddIdx ["hej"; "med"; "dig"]
 //tag listen xs - pipe det og brug mapi så jeg mapper alle index på elementerne med et integer - filter det så lige tal bliver fjernet - brug List.map og tag første element da vi ikke vil have index men kun string
 

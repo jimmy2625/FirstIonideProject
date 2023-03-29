@@ -28,6 +28,11 @@
     <Compile Include="Exam2020Re.fs" />
     <Compile Include="Exam_2022.fs" />
     <Compile Include="varmen.fs" />
+    <Compile Include="Ass1.fs" />
+    <Compile Include="Ass2.fs" />
+    <Compile Include="Ass3.fs" />
+    <Compile Include="Ass4.fs" />
+    <Compile Include="Ass5.fs" />
   </ItemGroup>
 
 </Project>
