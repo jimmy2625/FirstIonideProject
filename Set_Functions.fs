@@ -40,4 +40,4 @@ Set.intersect testSet deSeje
 //Set.difference creates a Set with the elements not in deSeje but is in TestSet
 Set.difference testSet deSeje
 
-//The rest of the Set functions work in the same fashion as the List functionss
+//The rest of the Set functions work in the same fashion as the List functions

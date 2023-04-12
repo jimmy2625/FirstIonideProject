@@ -33,6 +33,8 @@
     <Compile Include="Ass3.fs" />
     <Compile Include="Ass4.fs" />
     <Compile Include="Ass5.fs" />
+    <Compile Include="Recursion.fs" />
+    <Compile Include="2022.fs" />
   </ItemGroup>
 
 </Project>

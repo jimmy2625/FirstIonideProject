@@ -37,9 +37,9 @@ module Exam2022
     
 (* Question 1.1 *)
     (*
-    I have to recurse over the all of the grayscales inside of the Quad to make the code work.
-    This is done by adding the results of the recursive calls to each grayscale inside the Quad
-    My approach includes when matching a Square where the value is 255uy, the count will be increased by 1
+        I have to recurse over the all of the grayscales inside of the Quad to make the code work.
+        This is done by adding the results of the recursive calls to each grayscale inside the Quad
+        My approach includes when matching a Square where the value is 255uy, the count will be increased by 1
     *)
    
     let rec countWhite (img : grayscale) : int =
@@ -50,9 +50,9 @@ module Exam2022
     
 (* Question 1.2 *)
     (*
-    If it is a Square just return it
-    If it is a Quad then run recursively the rotation on the grayscale
-    I did not figure out how to make it run recursively on the other elements in the Quad
+        If it is a Square just return it
+        If it is a Quad then run recursively the rotation on the grayscale
+        I did not figure out how to make it run recursively on the other elements in the Quad
     *)
     let rec rotateRight img =
         match img with
@@ -60,26 +60,36 @@ module Exam2022
         |Quad(a,b,c,d) -> Quad(rotateRight d, rotateRight a, rotateRight b, rotateRight c)
             
 (* Question 1.3 *)
-    //almost
+    (*
+        If it is a Square then run the mapper function on the x itself
+        If it is a Quad then apply the recursive map with the mapper on each grayscale inside the Quad
+
+        The bitmap function works by applying the map function with the lambda function inside to check if the
+        uint is less than or equal to 127uy which indicates the square is black else return a white square (255uy)
+    *)
     let rec map mapper img =
         match img with
-        |Square x -> mapper Square x
+        |Square x -> mapper x
         |Quad(a,b,c,d) -> Quad(map mapper a, map mapper b, map mapper c, map mapper d)
     
-    let bitmap _ = failwith "not implemented"
+    let bitmap img = map (fun x -> if x <= 127uy then Square 0uy else Square 255uy) img
 
 (* Question 1.4 *)
-//Almost
+    (*
+        Same case with Square as in 1.3 map, but this time with the added acc
+        In the case of Quad apply the folder function and acc to the grayscale a inside the quad
+        Then use this value as the acc for the calculation for the b grayscale and so on
+
+        CountWhite2 is implemented with the help of the just created fold function
+        I add an acc in the lambda function which represents the amount of white squares whereas the lambda function
+        checks whether or not that particular square is white which increases the acc, else just return the same acc
+    *)
     let rec fold folder acc img =
         match img with
-        |Square x -> acc
-        |Quad(a,b,c,d) -> folder(folder(folder(folder acc a)b)c) d
-    
-    let countWhite2 img = 
-        match img with
-        |Square x when x = 255uy -> + 1
-        |Quad(a,b,c,d) -> fold countWhite a + fold countWhite b + fold countWhite c + fold countWhite d
-        |_ -> 0
+        |Square x -> folder acc x
+        |Quad(a,b,c,d) -> fold folder (fold folder (fold folder (fold folder acc a) b) c) d
+
+    let countWhite2 img = fold (fun acc x -> if x = 255uy then 1 + acc else acc) 0 img
 
 (* 2: Code Comprehension *)
     let rec foo =
@@ -113,13 +123,13 @@ module Exam2022
        foo and bar?
 
     A: foo = intToBinary
-       bar = intListToBinary
+       bar = intListToBinaryList
         
     Q: The function foo does not return reasonable results for all possible inputs.
        What requirements must we have on the input to foo in order to get reasonable results?
     
-    A: The input must be a non-negative integer and inside the allowable range for 32-bit signed integers as well
-    Furthermore, if the 
+    A: The function fails for negative numbers as odd numbers modulo two equal to -1.
+       Moreover, the function returns the wrong value for 0 (the binary representation of 0 is not "")
     *)
         
 
@@ -132,10 +142,8 @@ module Exam2022
     
     Q: What warning and why?
 
-    A: Foo has an incomplete pattern matching warning for the value "1".
-    This warning occurs because the match case for the value "1" is not covered in the pattern matching.
-    However, if 1 is input into the foo function, it will go to the last case and return "1", afterwards
-    1 will be divided by 2 which results in 0 and returns the binary string representation of 1 which is 1.
+    A: Since there is no non-constant match without a when clause the compiler cannot determine whether or not
+       the when clauses are exhaustive or not. In this case they are not as described in Q2.1.  
 
     *)
 
@@ -182,13 +190,13 @@ module Exam2022
     the accumulator when the 0 case is reached
 *)
     
-    let fooTail x =
-        let rec inner x' acc =
-            match x' with
+    let fooTail =
+        let rec aux acc =
+            function
             | 0 -> acc
-            | x when x % 2 = 0 -> foo (x / 2) + "0"
-            | x when x % 2 = 1 -> foo (x / 2) + "1"
-        inner x ""
+            | x when x % 2 = 0 -> aux ("0" + acc) (x / 2)
+            | x                -> aux ("1" + acc) (x / 2)
+        aux ""
 
 (* Question 2.6
     I used continuation by continually running fooTail on the x element inside my inner recursive call
@@ -220,13 +228,19 @@ module Exam2022
             printfn ""
 
 (* Question 3.1 *)
-    //this did not work
-    let failDimensions m1 m2 = failwith "Invalid matrix dimensions: m1 rows =" numRows m1 "m1 columns = <number of
-    columns in m1>, m2 roms = <number of rows in m2>, m2 columns = <number of columns in m2>"
+    //I assign the numrows with let-statements to make the code cleaner, then i simply put them in the failwith string
+    let failDimensions (m1: matrix) (m2: matrix) =
+        let nrm1 = numRows m1
+        let nrm2 = numRows m2
+        let ncm1 = numCols m1
+        let ncm2 = numCols m2
+        let st = $"Invalid matrix dimensions: m1 rows = {nrm1}, m1 columns = {ncm1},
+                    m2 rows = {nrm2}, m2 columns = {ncm2}"
+        failwith st
     
 (* Question 3.2 *)
     //almost
-    let add m1 m2 = if numRows m1 = numRows m2 && numCols m1 = numCols m2 then (init (fun x y -> x+y) (numRows m1) (numCols m1)) else failDimensions m1 m2 
+    let add m1 m2 = if numRows m1 = numRows m2 && numCols m1 = numCols m2 then (init (fun x y -> (get m1 x y) + (get m2 x y)) (numRows m1) (numCols m1)) else failDimensions m1 m2 
     
     add (init (fun x y -> x + y) 2 3) (init (fun x y -> x * y) 2 3) |> print
 
@@ -256,7 +270,23 @@ module Exam2022
 
 (* Question 4.2 *)
 
-    let runStackProg (prog:stackProgram) : int = failwith "not implemented"
+    let runStackProg (prog: stackProgram) =
+        if prog = [] then failwith "empty stack"
+            else
+                let rec aux sp (acc: stack) =
+                    match sp with
+                    | []       -> acc.Head
+                    | x::xs -> match x with
+                                |Push n -> aux xs (n::acc)
+                                |Add    -> match acc with
+                                           | []        -> failwith "empty stack"
+                                           | x::y::ys  -> aux xs ((x+y)::ys)
+                                           | _         -> failwith "empty stack"
+                                |Mult   -> match acc with
+                                           | []        -> failwith "empty stack"
+                                           | x::y::ys  -> aux xs ((x*y)::ys)
+                                           | _         -> failwith "empty stack"
+                aux prog (emptyStack ())
     
 (* Question 4.3 *)
     
