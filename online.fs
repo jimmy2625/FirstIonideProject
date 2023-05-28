@@ -203,4 +203,3 @@ let isArmstrongNumber number =
     let numDigits = Seq.length digits
     let sum = Seq.fold (fun acc digit -> acc + pown digit numDigits) 0 digits
     sum = number
-

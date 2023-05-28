@@ -156,6 +156,20 @@ and baz = foo bar
     
 *)
 
+//3 Guess the next sequence element
+
+//3.1
+type element = E of char list
+
+//3.2
+let elToString (E ls) = List.map string ls |> String.concat ""
+
+elToString E['1';'1';'1';'3';'2';'2';'1']
+
+let elFromString (s:string) = Seq.toList s |> E
+
+elFromString "1113221"
+
 //4 Rings
 
 //4.1

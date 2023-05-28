@@ -44,9 +44,8 @@ module Exam2022
    
     let rec countWhite (img : grayscale) : int =
         match img with
-        |Square x when x = 255uy -> + 1
+        |Square x -> if x = 255uy then 1 else 0
         |Quad(a,b,c,d) -> countWhite a + countWhite b + countWhite c + countWhite d
-        |_ -> 0
     
 (* Question 1.2 *)
     (*
@@ -254,44 +253,37 @@ module Exam2022
     
 (* Question 3.3 *)
 
-    let dotProduct (m1: matrix) (m2: matrix) (row: int) (col: int) : int =
-        let mutable result = 0
-        let m1Cols = numCols m1
-        let m2Rows = numRows m2
-        for i in 0..m1Cols-1 do
-            result <- result + (get m1 row i * get m2 i col)
-        result
+    let dotProduct m1 m2 row col =
+        let b = numCols m1
+        let lst = [0..b-1]
+        List.fold 
+            (fun acc j -> (get m1 row j) * (get m2 j col) + acc)
+            0 lst
 
-    let mult (m1: int[,]) (m2: int[,]) =
-        let m1Rows, m1Cols = m1.GetLength(0), m1.GetLength(1)
-        let m2Rows, m2Cols = m2.GetLength(0), m2.GetLength(1)
-        
-        if m1Cols <> m2Rows then
-            failDimensions m1 m2
-        
-        let result = Array2D.create m1Rows m2Cols 0
-
-        for i in 0 .. m1Rows - 1 do
-            for j in 0 .. m2Cols - 1 do
-                let mutable sum = 0
-                for k in 0 .. m1Cols - 1 do
-                    sum <- sum + m1.[i, k] * m2.[k, j]
-                result.[i, j] <- sum
-
-        result
+    let mult m1 m2 =
+        if (numCols m1 <> numRows m2) then failDimensions m1 m2
+        else
+            let f row col = dotProduct m1 m2 row col
+            init f (numRows m1) (numCols m2)
 
 (* Question 3.4 *)
     open System.Threading.Tasks
 
-    let parInit (f : int -> int -> int) (rows : int) (cols : int) : int[,] =
-        let result = Array2D.create rows cols 0
-
-        Parallel.For(0, rows, fun i ->
-            for j = 0 to cols - 1 do
-                result.[i, j] <- f i j
-        )
-
-        result
+    let parInit f rows cols = 
+        let m = init (fun row col -> 0) rows cols
+        let lst = List.init (rows*cols) 
+                    (fun id -> (id/cols, id%cols))
+        
+        List.map
+            (fun (row,col) ->
+                async {
+                    do set m row col (f row col)
+                }
+                ) lst
+        |> Async.Parallel
+        |> Async.RunSynchronously
+        |> ignore
+        m 
 
 
 (* 4: Stack machines *)
@@ -372,24 +364,42 @@ module Exam2022
 
     let state = new StateBuilder()
 
-    let runStackProg2 (prog: stackProgram) =
-        if prog = [] then SM (fun _ -> None)
-            else
-                let rec aux sp (acc: stack) =
-                    match sp with
-                    | []       -> SM (fun s -> Some ((acc.Head), s))
-                    | x::xs -> match x with
-                                |Push n -> aux xs (n::acc)
-                                |Add    -> match acc with
-                                           | []        -> SM (fun _ -> None)
-                                           | x::y::ys  -> aux xs ((x+y)::ys)
-                                           | _         -> SM (fun _ -> None)
-                                |Mult   -> match acc with
-                                           | []        -> SM (fun _ -> None)
-                                           | x::y::ys  -> aux xs ((x*y)::ys)
-                                           | _         -> SM (fun _ -> None)
-                aux prog (emptyStack ())
+    let rec runStackProg2 prog = 
+        state {
+            match prog with
+            | [] -> return! pop
+            | x :: xs ->
+                match x with
+                | Push a ->
+                    do! push a
+                    return! runStackProg2 xs
+                | Add ->
+                    let! first = pop
+                    let! second = pop
+                    do! push (first + second)
+                    return! runStackProg2 xs
+                | Mult ->
+                    let! first = pop
+                    let! second = pop
+                    do! push (first * second)
+                    return! runStackProg2 xs
+        }
     
 (* Question 4.5 *)
 
-    let parseStackProg _ = failwith "not implemented"
+    open JParsec.TextParser
+
+    let whitespaceChar = satisfy System.Char.IsWhiteSpace
+    let spaces = many whitespaceChar
+
+    let (.>*>.) p1 p2 = p1 .>> spaces .>>. p2 // fjerner mellemrum mellem p1 og p2, returner (p1, p2)
+    let (.>*>) p1 p2 = p1 .>> spaces .>> p2
+    let (>*>.) p1 p2 = p1 .>> spaces >>. p2
+
+    let pPush = spaces >>. pstring "PUSH" >*>. pint32 |>> (fun x -> Push x)
+    let pAdd = spaces >>. pstring "ADD" |>> (fun x -> Add) // "ADD" -> Add
+    let pMult = spaces >>. pstring "MULT" |>> (fun x -> Mult) // "MULT" -> Mult
+
+    let parseStackProg (str: string) =
+        let parser = many (pPush <|> pAdd <|> pMult)
+        run parser str

@@ -1,66 +1,66 @@
 module varmen
 
-type direction = North | East | South | West
-type coord = C of int * int
+type grayscale =
+| Square of uint8
+| Quad of grayscale * grayscale * grayscale * grayscale
 
-let move dist dir (C(x,y)) =
-    match dir with
-    |North -> C(x, y - dist)
-    |South -> C(x, y + dist)
-    |West -> C(x - dist, y)
-    |East -> C(x + dist, y)
+let img =
+ Quad (Square 255uy,
+        Square 128uy,
+        Quad(Square 255uy,
+            Square 128uy,
+            Square 192uy,
+            Square 64uy),
+        Square 0uy)
 
-let turnRight dir =
-    match dir with
-    |North -> East
-    |South -> West
-    |West -> North
-    |East -> South
+let rec countWhite img =   
+    match img with
+    |Square x -> if x = 255uy then + 1 else 0
+    |Quad(a,b,c,d) -> countWhite a + countWhite b + countWhite c + countWhite d
 
-let turnLeft dir =
-    match dir with
-    |North -> West
-    |South -> East
-    |West -> South
-    |East -> North
+let rec rotateRight img =
+    match img with
+    |Square x -> Square x
+    |Quad(a,b,c,d) -> Quad(rotateRight d, rotateRight a, rotateRight b, rotateRight c)
 
-type position = P of (coord * direction)
-type move = TurnLeft | TurnRight | Forward of int
+let rec map mapper img =
+    match img with
+    |Square x -> mapper x
+    |Quad(a,b,c,d) -> Quad(map mapper a, map mapper b, map mapper c, map mapper d)
 
-let step (P(coord, direction)) m =
-    match m with
-    |TurnRight -> (P(coord, turnRight direction))
-    |TurnLeft -> (P(coord, turnLeft direction))
-    |Forward x -> (P(move x direction coord, direction))
+let bitmap img = map (fun x -> if x <= 127uy then Square 0uy else Square 255uy) img
 
-let rec walk (P(coord, direction)) ms =
-    match ms with
-    |[] -> (P(coord, direction))
-    |x::xs -> walk (step (P(coord,direction)) x) xs
+let rec fold folder acc img =
+    match img with
+    |Square x -> folder acc x
+    |Quad(a,b,c,d) -> fold folder (fold folder (fold folder (fold folder acc a) b) c) d
 
-let walk2 = List.fold step
+let countWhite2 img = fold (fun acc x -> if x = 255uy then acc + 1 else acc) 0 img
 
-let rec path (P(coord, direction)) ms =
-    match ms with
-    |[] -> [coord]
-    |x::xs -> 
-        match x with
-        |TurnLeft|TurnRight -> path (step (P(coord, direction))x) xs
-        |Forward x -> coord :: path (P(move x direction coord, direction)) xs
+let rec foo =
+    function
+    | 0 -> ""
+    | x when x % 2 = 0 -> foo (x / 2) + "0"
+    | x when x % 2 = 1 -> foo (x / 2) + "1"
 
-type ring<'a> = R of 'a list * 'a list
+let rec bar =
+    function
+    | [] -> []
+    | x :: xs -> (foo x) :: (bar xs)
 
-let length (R(a,b)) = List.length a + List.length b
+(*
+    The type of foo is: int -> string
+    The type of bar is: list<int> -> list<string>
 
-let ringFromList a = R([], a)
+    foo returns the binary representation of the given int in a string format
+    bar returns the list of binary representations as a a string from the given list of ints
 
-let ringToList (R(a,b)) = b @ List.rev a
+    foo: intToBinary
+    bar: intListToBinaryList
 
-let empty = R([],[])
+    the input to foo has to be a non-negative integer for it to compile, furthermore foo 0 returns the wrong result
+*)
 
-let push x (R(a,b)) = R(a, x::b)
-
-let peek = function
-    | R([],[]) -> None 
-    | R(a,[]) -> Some (List.head (List.rev a))
-    | R(_, y :: _) -> Some y
+(*
+    Foo throws an incomplete pattern matching warning because the when-clauses are not exhaustive because there is no non-constant match without a when-clause.
+*)

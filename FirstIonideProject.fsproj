@@ -34,8 +34,9 @@
     <Compile Include="Ass4.fs" />
     <Compile Include="Recursion.fs" />
     <Compile Include="online.fs" />
-    <Compile Include="øvelse.fs" />
     <Compile Include="bogen.fs" />
+    <Compile Include="TAExam2022.fs" />
+    <Compile Include="TailRecursion.fs" />
   </ItemGroup>
 
 </Project>

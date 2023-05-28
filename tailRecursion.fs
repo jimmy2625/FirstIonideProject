@@ -1,4 +1,4 @@
-module FirstIonideProject.tailRecursion
+module tailRecursion
 
 let rec fact : int -> int =
     function

@@ -210,6 +210,17 @@ let rec baz2 =
  (*
      To make it a tail recursive solution I must make sure that any call to aux is made at the outermost point of the branch
      (right after the arrow) Also add the continuation call in every branch
+
+     I will evaluate the function call foo 10 [9;5;10;11]
+
+    foo 10 [9;5;10;11]
+    -> 9 :: (foo 10 [5;10;11])
+    -> 9 :: 5 :: (foo 10 [10;11])
+    -> 9 :: 5 :: [11]
+    -> [9;5;11]
+
+    It is not tail-recursive since the recursive foo call is not the last call of the evaluation
+    There is a lot of cons operators stored in memory, which creates the list at the very end, therefore making it not tail-recursive
  *)
 
 let fooTail x lst =
