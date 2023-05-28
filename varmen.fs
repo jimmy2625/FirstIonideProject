@@ -1,65 +1,66 @@
 module varmen
 
-type cmd = Push of int | Add | Mult
-type stackProgram = cmd list
+type direction = North | East | South | West
+type coord = C of int * int
 
-type stack = int list
+let move dist dir (C(x,y)) =
+    match dir with
+    |North -> C(x, y - dist)
+    |South -> C(x, y + dist)
+    |West -> C(x - dist, y)
+    |East -> C(x + dist, y)
 
-let emptyStack () : stack = []
+let turnRight dir =
+    match dir with
+    |North -> East
+    |South -> West
+    |West -> North
+    |East -> South
 
-let runStackProg prog =
-    if prog = [] then failwith "empty stack" else
-        let rec inner prog' (acc:stack) =
-            match prog' with 
-            |[] -> acc.Head
-            |x::xs -> match x with
-                        |Push y -> inner xs (y::acc)
-                        |Add -> match acc with
-                                |[] -> failwith "empty stack"
-                                |x::y::ys -> inner xs ((x+y)::ys)
-                                |_ -> failwith "empty stack"
-                        |Mult -> match acc with
-                                |[] -> failwith "empty stack"
-                                |x::y::ys -> inner xs ((x*y)::ys)
-                                |_ -> failwith "empty stack"
-        inner prog (emptyStack())
+let turnLeft dir =
+    match dir with
+    |North -> West
+    |South -> East
+    |West -> South
+    |East -> North
 
-runStackProg [Push 5; Push 4; Add; Push 8; Mult]
+type position = P of (coord * direction)
+type move = TurnLeft | TurnRight | Forward of int
 
-type StateMonad<'a> = SM of (stack -> ('a * stack) option)
-let ret x = SM (fun s -> Some (x, s))
-let fail = SM (fun _ -> None)
-let bind f (SM a) : StateMonad<'b> =
-        SM (fun s ->
-                match a s with
-                | Some (x, s') ->
-                let (SM g) = f x
-                g s'
-                | None -> None)
-let (>>=) x f = bind f x
-let (>>>=) x y = x >>= (fun _ -> y)
-let evalSM (SM f) = f (emptyStack ())
+let step (P(coord, direction)) m =
+    match m with
+    |TurnRight -> (P(coord, turnRight direction))
+    |TurnLeft -> (P(coord, turnLeft direction))
+    |Forward x -> (P(move x direction coord, direction))
 
-let push x = SM (fun stack -> Some((),x::stack))
+let rec walk (P(coord, direction)) ms =
+    match ms with
+    |[] -> (P(coord, direction))
+    |x::xs -> walk (step (P(coord,direction)) x) xs
 
-let pop = SM (fun stack -> if stack.Length > 0 then Some(stack.Head, stack.Tail) else None)
+let walk2 = List.fold step
 
-let runStackProg2 (prog: stackProgram) =
-        if prog = [] then SM (fun _ -> None)
-            else
-                let rec aux sp (acc: stack) =
-                    match sp with
-                    | []       -> SM (fun s -> Some ((acc.Head), s))
-                    | x::xs -> match x with
-                                |Push n -> aux xs (n::acc)
-                                |Add    -> match acc with
-                                           | []        -> SM (fun _ -> None)
-                                           | x::y::ys  -> aux xs ((x+y)::ys)
-                                           | _         -> SM (fun _ -> None)
-                                |Mult   -> match acc with
-                                           | []        -> SM (fun _ -> None)
-                                           | x::y::ys  -> aux xs ((x*y)::ys)
-                                           | _         -> SM (fun _ -> None)
-                aux prog (emptyStack ())
+let rec path (P(coord, direction)) ms =
+    match ms with
+    |[] -> [coord]
+    |x::xs -> 
+        match x with
+        |TurnLeft|TurnRight -> path (step (P(coord, direction))x) xs
+        |Forward x -> coord :: path (P(move x direction coord, direction)) xs
 
-[Push 5; Push 4; Add; Push 8; Mult] |> runStackProg2 |> evalSM |> Option.map fst
+type ring<'a> = R of 'a list * 'a list
+
+let length (R(a,b)) = List.length a + List.length b
+
+let ringFromList a = R([], a)
+
+let ringToList (R(a,b)) = b @ List.rev a
+
+let empty = R([],[])
+
+let push x (R(a,b)) = R(a, x::b)
+
+let peek = function
+    | R([],[]) -> None 
+    | R(a,[]) -> Some (List.head (List.rev a))
+    | R(_, y :: _) -> Some y

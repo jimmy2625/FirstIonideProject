@@ -200,3 +200,15 @@ let ringStep3 : StateMonad<unit, int> =
                 do! smPush x
                 do! smCCW
     }
+
+let rec iterRemoveSumEven = function
+    | 0u -> ret ()
+    | x -> ringStep >>>= iterRemoveSumEven (x - 1u)
+
+let rec iterRemoveSumEven2 x =
+prog {
+    if x > 0u
+    then
+        do! ringStep
+        do! iterRemoveSumEven2 (x - 1u)
+}

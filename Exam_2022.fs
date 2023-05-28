@@ -170,12 +170,23 @@ module Exam2022
        Keep in mind that all steps in an evaluation chain must evaluate to the same value
        ((5 + 4) * 3 --> 9 * 3 --> 27, for instance).
 
-    A: I picked foo to analyze:
-    foo 4
-    = (foo 2) + "0" 
-    = "0" + "0"
-    = (foo 1) + "0" + "0"
-    = "1" + "0" + "0"
+    A: I have chosen foo to evaluate with the call foo 10
+
+    foo 10 -->
+    foo (10 / 2) + "0" -->
+    foo 5 + "0" -->
+    (foo (5 / 2) + "1") + "0" -->
+    (foo 2 + "1") + "0" -->
+    ((foo (2 / 2) + "0") + "1") + "0" -->
+    ((foo 1 + "0") + "1") + "0" -->
+    (((foo (1 / 2) + "1") + "0") + "1") + "0" -->
+    (((foo 0 + "1") + "0") + "1") + "0" -->
+    ((("" + "1") + "0") + "1") + "0" -->
+    (("1" + "0") + "1") + "0" -->
+    ("10" + "1") + "0" -->
+    "101" + "0" -->
+    "1010"
+    
     Foo is not tail-recursive because it still has to do some computations after the recursive call "foo (x/2)" which is adding the + "0" or "1"
     
     Q: Even though neither `foo` nor `bar` is tail recursive only one of them runs the risk of overflowing the stack.
@@ -228,7 +239,6 @@ module Exam2022
             printfn ""
 
 (* Question 3.1 *)
-    //I assign the numrows with let-statements to make the code cleaner, then i simply put them in the failwith string
     let failDimensions (m1: matrix) (m2: matrix) =
         let nrm1 = numRows m1
         let nrm2 = numRows m2
@@ -242,18 +252,47 @@ module Exam2022
     //almost
     let add m1 m2 = if numRows m1 = numRows m2 && numCols m1 = numCols m2 then (init (fun x y -> (get m1 x y) + (get m2 x y)) (numRows m1) (numCols m1)) else failDimensions m1 m2 
     
-    add (init (fun x y -> x + y) 2 3) (init (fun x y -> x * y) 2 3) |> print
-
 (* Question 3.3 *)
-    
-    let m1 = (init (fun i j -> i * 3 + j + 1) 2 3) 
-    let m2 = (init (fun j k -> j * 2 + k + 1) 3 2)
 
-    let dotProduct m1 m2 row col = failwith "not implemented"
-    let mult _ = failwith "not implemented"
+    let dotProduct (m1: matrix) (m2: matrix) (row: int) (col: int) : int =
+        let mutable result = 0
+        let m1Cols = numCols m1
+        let m2Rows = numRows m2
+        for i in 0..m1Cols-1 do
+            result <- result + (get m1 row i * get m2 i col)
+        result
+
+    let mult (m1: int[,]) (m2: int[,]) =
+        let m1Rows, m1Cols = m1.GetLength(0), m1.GetLength(1)
+        let m2Rows, m2Cols = m2.GetLength(0), m2.GetLength(1)
+        
+        if m1Cols <> m2Rows then
+            failDimensions m1 m2
+        
+        let result = Array2D.create m1Rows m2Cols 0
+
+        for i in 0 .. m1Rows - 1 do
+            for j in 0 .. m2Cols - 1 do
+                let mutable sum = 0
+                for k in 0 .. m1Cols - 1 do
+                    sum <- sum + m1.[i, k] * m2.[k, j]
+                result.[i, j] <- sum
+
+        result
 
 (* Question 3.4 *)
-    let parInit _ = failwith "not implemented"
+    open System.Threading.Tasks
+
+    let parInit (f : int -> int -> int) (rows : int) (cols : int) : int[,] =
+        let result = Array2D.create rows cols 0
+
+        Parallel.For(0, rows, fun i ->
+            for j = 0 to cols - 1 do
+                result.[i, j] <- f i j
+        )
+
+        result
+
 
 (* 4: Stack machines *)
 

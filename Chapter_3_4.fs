@@ -128,7 +128,7 @@ let rec canBeExtBy (m: Map) (col:Colour) (c:Country) =
         | []       -> true
         | c'::col' -> not(areNb m c' c) && canBeExtBy m col' c;;
    
- canBeExtBy exMap ["c"] "a"
+
  //TRUE
 
  canBeExtBy exMap ["a"; "c"] "b";;

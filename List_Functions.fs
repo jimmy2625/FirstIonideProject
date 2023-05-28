@@ -26,7 +26,7 @@ List.filter (fun x -> x < 4) testIntegerList
 //The y represents the element from the list
 List.fold (fun acc x -> if x % 2 = 0 then acc+x else acc) 0 testIntegerList
 
-//Usin List.fold to create a new list, returns the reversed list since the element is put in front of the list as it folds
+//Using List.fold to create a new list, returns the reversed list since the element is put in front of the list as it folds
 List.fold(fun acc x -> x::acc) [] testIntegerList
 
 //List.foldback (folder list acc) returns the list in the same order since the input is fed in reverse order

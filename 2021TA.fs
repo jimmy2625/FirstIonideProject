@@ -1,4 +1,4 @@
-module FirstIonideProject
+module TA
 
 type direction = North | East | South | West
 type coord = C of int * int

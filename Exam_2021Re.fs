@@ -18,8 +18,6 @@ let rec length binlst =
     |Cons1 (_,b) -> 1 + length b
     |Cons2 (_,b) -> 1 + length b 
 
-length (Cons1 (3, Cons2 (true, Cons1 (4, Cons2 (false, Cons2(true, Nil))))))
-
 //1.2
 (*
   If Nil then return two empty lists
@@ -34,8 +32,6 @@ let rec split binlst =
   |Cons1 (a,b) -> (a:: fst (split b), snd(split b))
   |Cons2 (a,b) -> (fst (split b)), a::snd (split b)
 
-split (Cons1 (3, Cons2 (true, Cons1 (4, Cons2 (false, Cons2(true, Nil))))))
-
 (*
   If Nil then return a tuple of ints of (0,0)
   I do the same as in split but instead of appending, I add 1 to the fst in Cons1 and add 1 to the snd if Cons2
@@ -45,10 +41,6 @@ let rec length2 binlst =
   |Nil -> (0,0)
   |Cons1 (_,b) -> (1 + fst (length2 b), snd (length2 b))
   |Cons2 (_,b) -> (fst(length2 b), 1 + snd (length2 b))
-
-length2 (Nil : binList<int, bool>)
-
-length2 (Cons1 (3, Cons2 (true, Cons1 (4, Cons2 (false, Cons2(true, Nil))))))
 
 //1.3
 (*
@@ -61,14 +53,6 @@ let rec map f g binlst =
   |Nil -> Nil
   |Cons1 (a,b) -> Cons1(f a, map f g b)
   |Cons2 (a,b) -> Cons2(g a, map f g b)
-
-map (fun x -> x % 2 = 0) 
-    (function | true -> 0 | false -> 1)
-    (Nil : binList<int, bool>)
-
-map (fun x -> x % 2 = 0) 
-    (function | true -> 0 | false -> 1) 
-    (Cons1 (3, Cons2 (true, Cons1 (4, Cons2 (false, Cons2(true, Nil))))))
 
 //1.4
 (*
@@ -83,10 +67,6 @@ let rec filter f g binlst =
   |Cons1 (a,b) -> if f a then Cons1(a,filter f g b) else filter f g b
   |Cons2 (a,b) -> if g a then Cons2(a,filter f g b) else filter f g b
 
-filter (fun x -> x % 2 = 0) 
-       id 
-       (Cons1 (3, Cons2 (true, Cons1 (4, Cons2 (false, Cons2(true, Nil))))))
-
 //1.5
 (*
   If Nil then return the acc
@@ -100,29 +80,19 @@ let rec fold f g acc binlst =
   |Cons1 (a,b) -> fold f g (f acc a) b
   |Cons2 (a,b) -> fold f g (g acc a) b
 
-fold (+) 
-     (fun acc -> function | true -> acc | false -> -acc) 
-     0 
-     (Nil : binList<int, bool>)
-
-fold (+) 
-     (fun acc -> function | true -> acc | false -> -acc) 
-     0 
-     (Cons1 (3, Cons2 (true, Cons1 (4, Cons2 (false, Cons2(true, Nil))))))
-
 //2 Code Comprehension
 (*
   2.1
-  Type of foo = list<'a> -> list<'a> -> list<'a>
-  Type of bar = list<'a> -> list<'a>
+  type of foo: list<'a> -> list<'a> -> list<'a>
+  type of bar: list<'a> -> list<'a>
 
-  bar is sorting the list
+  bar sorts the input list in ascending order
 
-  foo can be called indexSort
-  bar can be called mergeSort
+  appropriate name for foo: merge
+  appropriate name for bar: mergeSort
 
-  a = mergeList1
-  b = mergeList2
+  appropriate name for a in bar: firstMergeHalf
+  appropriate name for b in bar: secondMergeHalf
 *)
 
 let rec foo xs ys =
@@ -140,8 +110,6 @@ and bar =
     let (a, b) = List.splitAt (List.length xs / 2) xs
     foo (bar a) (bar b)
 
-bar [8;1;2;3;6;4]
-
 (*
   2.2
   The and keyword serves as the keyword for mutual recursion and widening the scope of the two functions
@@ -150,8 +118,48 @@ bar [8;1;2;3;6;4]
 
 (*
   2.3
-  
+  det her er crazy
 *)
+
+let foo2 xs ys =
+        List.unfold
+            (function
+             | [], []                      -> None
+             | [], y :: ys                 -> Some (y, ([], ys))
+             | x :: xs, []                 -> Some (x, (xs, []))
+             | x :: xs, y :: ys when x < y -> Some (x, (xs, y :: ys))
+             | x :: xs, y :: ys            -> Some (y, (x::xs, ys)))
+            (xs, ys)
+
+(*
+  2.4
+
+  I chose to analyze a call to foo [1; 3] [2; 4; 5]
+
+    foo [1; 3] [2; 4; 5] -->
+    1 :: foo [3] [2; 4; 5] -->
+    1 :: 2 :: foo [3] [4; 5] -->
+    1 :: 2 :: 3 :: foo [] [4; 5] -->
+    1 :: 2 :: 3 :: [4; 5] -->
+    [1; 2; 3; 4; 5]
+
+    the element "1" in line 2 is appended to a list that depends on the recursive call to foo. Therefore the element can't be appended before the recursive call is evaluated, because it has no tail to append on, making it not tail-recursive
+*)
+
+(*
+  2.5
+
+  den her er mindst lige så crazy
+*)
+
+let fooTail xs ys =
+    let rec aux cont xs ys =
+        match xs, ys with
+        | [], ys -> cont ys
+        | xs, [] -> cont xs
+        | x :: xs, y :: ys when x < y -> aux (fun result -> cont (x :: result)) xs (y :: ys)
+        | x :: xs, y :: ys -> aux (fun result -> cont (y :: result)) (x :: xs) ys
+    aux id xs ys
 
 //3 Approximating square roots
 //3.1
@@ -180,4 +188,4 @@ let mkRat n d =
 
 let ratToString (R(a,b)) = string a + " / " + string b
 
-mkRat 15 -10 |> Option.get |> ratToString
+mkRat 5 0 |> Option.get |> ratToString
