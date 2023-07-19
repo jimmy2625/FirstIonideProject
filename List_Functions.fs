@@ -23,7 +23,7 @@ List.filter (fun x -> x < 4) testIntegerList
 //List.fold (folder acc list) accumulates the elements of the list with the accumulation function f (folder) starting with the value e (initialState) - the function f is folded over the list
 //Adds all even numbers in the list together
 //The acc represents the accumulator
-//The y represents the element from the list
+//The x represents the element from the list
 List.fold (fun acc x -> if x % 2 = 0 then acc+x else acc) 0 testIntegerList
 
 //Using List.fold to create a new list, returns the reversed list since the element is put in front of the list as it folds

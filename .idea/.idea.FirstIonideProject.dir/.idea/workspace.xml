@@ -6,17 +6,12 @@
   <component name="ChangeListManager">
     <list default="true" id="0d14da8a-1af5-442e-aa8d-e06b33f776cf" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.FirstIonideProject.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.FirstIonideProject.dir/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assignment2.fs" beforeDir="false" afterPath="$PROJECT_DIR$/Assignment2.fs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Exam_2022.fs" beforeDir="false" afterPath="$PROJECT_DIR$/Exam_2022.fs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Exam_2021Re.fs" beforeDir="false" afterPath="$PROJECT_DIR$/Exam_2021Re.fs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FirstIonideProject.fsproj" beforeDir="false" afterPath="$PROJECT_DIR$/FirstIonideProject.fsproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/List_Functions.fs" beforeDir="false" afterPath="$PROJECT_DIR$/List_Functions.fs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/obj/Debug/net6.0/FirstIonideProject.assets.cache" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net6.0/FirstIonideProject.assets.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/obj/Debug/net6.0/FirstIonideProject.fsproj.CoreCompileInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net6.0/FirstIonideProject.fsproj.CoreCompileInputs.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/FirstIonideProject.fsproj.nuget.dgspec.json" beforeDir="false" afterPath="$PROJECT_DIR$/obj/FirstIonideProject.fsproj.nuget.dgspec.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/obj/FirstIonideProject.fsproj.nuget.g.props" beforeDir="false" afterPath="$PROJECT_DIR$/obj/FirstIonideProject.fsproj.nuget.g.props" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/fsac.cache" beforeDir="false" afterPath="$PROJECT_DIR$/obj/fsac.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/project.assets.json" beforeDir="false" afterPath="$PROJECT_DIR$/obj/project.assets.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/project.nuget.cache" beforeDir="false" afterPath="$PROJECT_DIR$/obj/project.nuget.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/project.packagespec.json" beforeDir="false" afterPath="$PROJECT_DIR$/obj/project.packagespec.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/obj/rider.project.restore.info" beforeDir="false" afterPath="$PROJECT_DIR$/obj/rider.project.restore.info" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/varmen.fs" beforeDir="false" afterPath="$PROJECT_DIR$/varmen.fs" afterDir="false" />
     </list>
@@ -49,6 +44,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.F#" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RunManager">
@@ -90,6 +86,7 @@
       <workItem from="1654174314287" duration="4605000" />
       <workItem from="1676295172274" duration="4089000" />
       <workItem from="1676299520311" duration="67000" />
+      <workItem from="1689755842187" duration="147000" />
     </task>
     <task id="LOCAL-00001" summary="Mine luksus noter :)">
       <created>1653991687933</created>

@@ -113,7 +113,7 @@ and bar =
 (*
   2.2
   The and keyword serves as the keyword for mutual recursion and widening the scope of the two functions
-  If I removed the And keyword then foo inside of the bar function would not be able to run bar
+  If I removed the And keyword then nothing would happen. The program would still work as `foo` does not call `bar`.
 *)
 
 (*

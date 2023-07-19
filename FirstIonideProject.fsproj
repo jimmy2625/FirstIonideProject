@@ -37,6 +37,7 @@
     <Compile Include="bogen.fs" />
     <Compile Include="TAExam2022.fs" />
     <Compile Include="TailRecursion.fs" />
+    <Compile Include="Exam_2019.fs" />
   </ItemGroup>
 
 </Project>
