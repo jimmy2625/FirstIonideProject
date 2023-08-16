@@ -37,9 +37,8 @@ module Exam2022
     
 (* Question 1.1 *)
     (*
-        I have to recurse over the all of the grayscales inside of the Quad to make the code work.
-        This is done by adding the results of the recursive calls to each grayscale inside the Quad
-        My approach includes when matching a Square where the value is 255uy, the count will be increased by 1
+        If square I return 1 if the square is white else 0
+        If quad i recursively call countWhite on each quadrant and add the tally together
     *)
    
     let rec countWhite (img : grayscale) : int =
@@ -49,9 +48,8 @@ module Exam2022
     
 (* Question 1.2 *)
     (*
-        If it is a Square just return it
-        If it is a Quad then run recursively the rotation on the grayscale
-        I did not figure out how to make it run recursively on the other elements in the Quad
+        If Square I return the same square since rotating a square does not change it
+        If Quad I call rotateRight recursively on each quadrant with the order changed to fit the description in the assignment
     *)
     let rec rotateRight img =
         match img with
@@ -116,7 +114,7 @@ module Exam2022
        Focus on what it does rather than how it does it.
 
     A: Foo creates the string representation of a given int
-    Bar takes each element of the list and runs foo on it and returns the result in a string list
+    Bar creates a list of the binary string representations from a given list of ints
     
     Q: What would be appropriate names for functions 
        foo and bar?
@@ -127,8 +125,8 @@ module Exam2022
     Q: The function foo does not return reasonable results for all possible inputs.
        What requirements must we have on the input to foo in order to get reasonable results?
     
-    A: The function fails for negative numbers as odd numbers modulo two equal to -1.
-       Moreover, the function returns the wrong value for 0 (the binary representation of 0 is not "")
+    A: The input must be a non-negative integer and inside the allowable range for 32-bit signed integers. 
+        Furthermore, foo returns the wrong value for the input 0, since the binary representation of 0 is not "" "")
     *)
         
 
@@ -142,8 +140,9 @@ module Exam2022
     Q: What warning and why?
 
     A: Since there is no non-constant match without a when clause the compiler cannot determine whether or not
-       the when clauses are exhaustive or not. In this case they are not as described in Q2.1.  
-
+       the when clauses are exhaustive or not.  
+        
+       to create foo2, I instead remove the second when-clause to make it exhaustive and also resulting in the exact same results for the same inputs as in foo.
     *)
 
     let rec foo2 =
@@ -192,7 +191,8 @@ module Exam2022
        Which one and why does  the other one not risk overflowing the stack?
 
     A: only bar risks overflowing the stacks as a list can be of arbitrary length and easily overflow the stack
-       as you recurse over them.
+       as you recurse over them. Foo will not overflow the stack as it's maximum number is 2^31 - 1. Since every 
+       recursive call halves by two so the maximum number of recursive cals is 31 which will not overflow the stack.
 
     *)
 (* Question 2.5
@@ -238,18 +238,16 @@ module Exam2022
             printfn ""
 
 (* Question 3.1 *)
-    let failDimensions (m1: matrix) (m2: matrix) =
-        let nrm1 = numRows m1
-        let nrm2 = numRows m2
-        let ncm1 = numCols m1
-        let ncm2 = numCols m2
-        let st = $"Invalid matrix dimensions: m1 rows = {nrm1}, m1 columns = {ncm1},
-                    m2 rows = {nrm2}, m2 columns = {ncm2}"
-        failwith st
-    
-(* Question 3.2 *)
-    //almost
-    let add m1 m2 = if numRows m1 = numRows m2 && numCols m1 = numCols m2 then (init (fun x y -> (get m1 x y) + (get m2 x y)) (numRows m1) (numCols m1)) else failDimensions m1 m2 
+    //I use an interpolated String to create my failwith message, and I use the %d format specifier to ensure it is an int
+    let failDimensions (m1 : matrix) (m2 : matrix) =
+        failwith
+            $"Invalid matrix dimensions: m1 rows = %d{numRows m1}, m1 columns = %d{numCols m1}, m2 roms = %d{numRows m2}, m2 columns = %d{numCols m2}"
+
+(* Question 3.2
+    I check if the number of rows and columns are the same, if not then call faildimensions with said number of rows.
+    If they are the same, use the init function from the definition with an anonymous function that adds the rows and cols from m1 with the rows and cols of m2
+*)
+    let add (m1 : matrix) (m2 : matrix) = if numRows m1 = numRows m2 && numCols m1 = numCols m2 then init (fun row col -> get m1 row col + get m2 row col) (numRows m1) (numCols m1) else failDimensions m1 m2
     
 (* Question 3.3 *)
 
@@ -295,9 +293,6 @@ module Exam2022
 
     type stack = int list (* replace this entire type with your own *)
     let emptyStack () : stack = []
-    
-    //I have made a helper length functions to use later on
-    let length (a: stack) = List.length a
 
 (* Question 4.2 *)
 
@@ -337,9 +332,6 @@ module Exam2022
     let (>>>=) x y = x >>= (fun _ -> y)
 
     let evalSM (SM f) = f (emptyStack ())
-    
-    //I also added the SM function of length as a helper function
-    let smLength = SM (fun stack -> Some (length stack,stack))
 
     (*
     For my push, I just append the chosen integer x at the top of my stack as the changed SM and return unit (), since the type

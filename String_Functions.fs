@@ -1,3 +1,5 @@
+module string
+
 let testList = ["hej";"nej"]
 let testString = "jimmy"
 

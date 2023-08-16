@@ -26,7 +26,7 @@ let rec foo x =
  | y :: ys when x = y -> ys
  | y :: ys -> y :: (foo x ys)
 
-//tail-recursive implemenation with continuation
+//tail-recursive implementation with continuation
 let fooTail x lst =
     let rec aux c = 
         function

@@ -38,6 +38,11 @@
     <Compile Include="TAExam2022.fs" />
     <Compile Include="TailRecursion.fs" />
     <Compile Include="Exam_2019.fs" />
+    <Compile Include="Exam.fs" />
+    <Compile Include="String_Functions.fs" />
+    <Compile Include="shuja_re_exam_2021.fs" />
+    <Compile Include="shuja_exam_2021.fs" />
+    <Compile Include="Exam_2023.fs" />
   </ItemGroup>
 
 </Project>
